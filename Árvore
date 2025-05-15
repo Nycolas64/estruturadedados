@@ -1,0 +1,28 @@
+
+public class Arvore {
+    No raiz;
+
+    public void inserir(int valor) {
+        raiz = inserirRec(raiz, valor);
+    }
+
+    private No inserirRec(No atual, int valor) {
+        if (atual == null) return new No(valor);
+        if (valor < atual.valor) atual.esquerda = inserirRec(atual.esquerda, valor);
+        else if (valor > atual.valor) atual.direita = inserirRec(atual.direita, valor);
+        return atual;
+    }
+
+    public void emOrdem() {
+        emOrdemRec(raiz);
+        System.out.println();
+    }
+
+    private void emOrdemRec(No atual) {
+        if (atual != null) {
+            emOrdemRec(atual.esquerda);
+            System.out.print(atual.valor + " ");
+            emOrdemRec(atual.direita);
+        }
+    }
+}
