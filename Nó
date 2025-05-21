@@ -1,8 +1,15 @@
 public class No {
-    int valor;
+    String valor;
     No esquerda, direita;
 
-    public No(int valor) {
+    public No(String valor) {
         this.valor = valor;
+    }
+
+    public int contarNos() {
+        int total = 1;
+        if (esquerda != null) total += esquerda.contarNos();
+        if (direita != null) total += direita.contarNos();
+        return total;
     }
 }
