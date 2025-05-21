@@ -11,8 +11,10 @@ public class Main {
         a.direita = c;
         b.esquerda = d;
         b.direita = e;
-        c.direita = f;
+        c.esquerda = f;
 
-        System.out.println(a.contarNos()); // saída esperada: 6
+        a.preOrdem();      
+        System.out.println();
+        System.out.println(a.contarNos()); 
     }
 }
