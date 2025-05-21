@@ -12,4 +12,10 @@ public class No {
         if (direita != null) total += direita.contarNos();
         return total;
     }
+
+    public void preOrdem() {
+        System.out.print(valor + " ");
+        if (esquerda != null) esquerda.preOrdem();
+        if (direita != null) direita.preOrdem();
+    }
 }
