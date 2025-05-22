@@ -13,8 +13,14 @@ public class Main {
         b.direita = e;
         c.esquerda = f;
 
-        a.emOrdem();
+        a.preOrdem();  
         System.out.println();
-        System.out.println(a.contarNos());
+        a.emOrdem();   
+        System.out.println();
+        a.posOrdem();  
+        System.out.println();
+        a.emNivel();   
+        System.out.println();
+        System.out.println(a.contarNos()); // 6
     }
 }
