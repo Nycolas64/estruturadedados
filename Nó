@@ -1,3 +1,4 @@
+import java.util.Stack;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -8,41 +9,4 @@ public class No {
     public No(String valor) {
         this.valor = valor;
     }
-
-    public int contarNos() {
-        int total = 1;
-        if (esquerda != null) total += esquerda.contarNos();
-        if (direita != null) total += direita.contarNos();
-        return total;
-    }
-
-    public void preOrdem() {
-        System.out.print(valor + " ");
-        if (esquerda != null) esquerda.preOrdem();
-        if (direita != null) direita.preOrdem();
-    }
-
-    public void emOrdem() {
-        if (esquerda != null) esquerda.emOrdem();
-        System.out.print(valor + " ");
-        if (direita != null) direita.emOrdem();
-    }
-
-    public void posOrdem() {
-        if (esquerda != null) esquerda.posOrdem();
-        if (direita != null) direita.posOrdem();
-        System.out.print(valor + " ");
-    }
-
-    public void emNivel() {
-        Queue<No> fila = new LinkedList<>();
-        fila.add(this);
-        while (!fila.isEmpty()) {
-            No atual = fila.poll();
-            System.out.print(atual.valor + " ");
-            if (atual.esquerda != null) fila.add(atual.esquerda);
-            if (atual.direita != null) fila.add(atual.direita);
-        }
-    }
 }
-
