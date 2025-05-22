@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class No {
     String valor;
     No esquerda, direita;
@@ -24,4 +27,22 @@ public class No {
         System.out.print(valor + " ");
         if (direita != null) direita.emOrdem();
     }
+
+    public void posOrdem() {
+        if (esquerda != null) esquerda.posOrdem();
+        if (direita != null) direita.posOrdem();
+        System.out.print(valor + " ");
+    }
+
+    public void emNivel() {
+        Queue<No> fila = new LinkedList<>();
+        fila.add(this);
+        while (!fila.isEmpty()) {
+            No atual = fila.poll();
+            System.out.print(atual.valor + " ");
+            if (atual.esquerda != null) fila.add(atual.esquerda);
+            if (atual.direita != null) fila.add(atual.direita);
+        }
+    }
 }
+
