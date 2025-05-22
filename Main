@@ -13,14 +13,16 @@ public class Main {
         b.direita = e;
         c.esquerda = f;
 
-        a.preOrdem();  
+        Arvore arvore = new Arvore(a);
+
+        arvore.preOrdem();
         System.out.println();
-        a.emOrdem();   
+        arvore.emOrdem();
         System.out.println();
-        a.posOrdem();  
+        arvore.posOrdem();
         System.out.println();
-        a.emNivel();   
+        arvore.emNivel();
         System.out.println();
-        System.out.println(a.contarNos()); // 6
+        System.out.println(arvore.contarNos());
     }
 }
