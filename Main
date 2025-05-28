@@ -24,5 +24,6 @@ public class Main {
         arvore.emNivel();
         System.out.println();
         System.out.println(arvore.contarNos());
+        System.out.println(arvore.contarNosFolha());
     }
 }
