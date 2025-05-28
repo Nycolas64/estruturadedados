@@ -1,0 +1,82 @@
+public class ArvoreRecursiva {
+    No raiz;
+
+    public ArvoreRecursiva(No raiz) {
+        this.raiz = raiz;
+    }
+
+    public int contarNos() {
+        return contarNos(raiz);
+    }
+
+    private int contarNos(No no) {
+        if (no == null) return 0;
+        return 1 + contarNos(no.esquerda) + contarNos(no.direita);
+    }
+
+    public void preOrdem() {
+        preOrdem(raiz);
+    }
+
+    private void preOrdem(No no) {
+        if (no == null) return;
+        System.out.print(no.valor + " ");
+        preOrdem(no.esquerda);
+        preOrdem(no.direita);
+    }
+
+    public void emOrdem() {
+        emOrdem(raiz);
+    }
+
+    private void emOrdem(No no) {
+        if (no == null) return;
+        emOrdem(no.esquerda);
+        System.out.print(no.valor + " ");
+        emOrdem(no.direita);
+    }
+
+    public void posOrdem() {
+        posOrdem(raiz);
+    }
+
+    private void posOrdem(No no) {
+        if (no == null) return;
+        posOrdem(no.esquerda);
+        posOrdem(no.direita);
+        System.out.print(no.valor + " ");
+    }
+
+    public void emNivel() {
+        int h = altura(raiz);
+        for (int i = 1; i <= h; i++) {
+            imprimirNivel(raiz, i);
+        }
+    }
+
+    private int altura(No no) {
+        if (no == null) return 0;
+        int esq = altura(no.esquerda);
+        int dir = altura(no.direita);
+        return 1 + Math.max(esq, dir);
+    }
+
+    private void imprimirNivel(No no, int nivel) {
+        if (no == null) return;
+        if (nivel == 1) System.out.print(no.valor + " ");
+        else {
+            imprimirNivel(no.esquerda, nivel - 1);
+            imprimirNivel(no.direita, nivel - 1);
+        }
+    }
+
+    public int contarNosFolha() {
+        return contarNosFolha(raiz);
+    }
+
+    private int contarNosFolha(No no) {
+        if (no == null) return 0;
+        if (no.esquerda == null && no.direita == null) return 1;
+        return contarNosFolha(no.esquerda) + contarNosFolha(no.direita);
+    }
+}
