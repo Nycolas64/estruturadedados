@@ -1,0 +1,29 @@
+public class MainRecursiva {
+    public static void main(String[] args) {
+        No a = new No("A");
+        No b = new No("B");
+        No c = new No("C");
+        No d = new No("D");
+        No e = new No("E");
+        No f = new No("F");
+
+        a.esquerda = b;
+        a.direita = c;
+        b.esquerda = d;
+        b.direita = e;
+        c.esquerda = f;
+
+        ArvoreRecursiva arvore = new ArvoreRecursiva(a);
+
+        arvore.preOrdem();
+        System.out.println();
+        arvore.emOrdem();
+        System.out.println();
+        arvore.posOrdem();
+        System.out.println();
+        arvore.emNivel();
+        System.out.println();
+        System.out.println(arvore.contarNos());
+        System.out.println(arvore.contarNosFolha());
+    }
+}
