@@ -1,12 +1,22 @@
-import java.util.Stack;
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class No {
     String valor;
     No esquerda, direita;
+    int altura;
 
     public No(String valor) {
         this.valor = valor;
+        this.altura = 1;
+    }
+
+    int altura(No no) {
+        return no == null ? 0 : no.altura;
+    }
+
+    void atualizarAltura() {
+        altura = 1 + Math.max(altura(esquerda), altura(direita));
+    }
+
+    int getBalance() {
+        return altura(esquerda) - altura(direita);
     }
 }
