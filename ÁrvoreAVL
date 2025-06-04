@@ -1,0 +1,93 @@
+public class ArvoreAVL {
+    No raiz;
+
+    public void inserir(String valor) {
+        raiz = inserir(raiz, valor);
+    }
+
+    private No inserir(No no, String valor) {
+        if (no == null) return new No(valor);
+        if (valor.compareTo(no.valor) < 0) no.esquerda = inserir(no.esquerda, valor);
+        else if (valor.compareTo(no.valor) > 0) no.direita = inserir(no.direita, valor);
+        else return no;
+        atualizarAltura(no);
+        return balancear(no);
+    }
+
+    public void remover(String valor) {
+        raiz = remover(raiz, valor);
+    }
+
+    private No remover(No no, String valor) {
+        if (no == null) return null;
+        if (valor.compareTo(no.valor) < 0) no.esquerda = remover(no.esquerda, valor);
+        else if (valor.compareTo(no.valor) > 0) no.direita = remover(no.direita, valor);
+        else {
+            if (no.esquerda == null || no.direita == null) {
+                no = (no.esquerda != null) ? no.esquerda : no.direita;
+            } else {
+                No temp = minValor(no.direita);
+                no.valor = temp.valor;
+                no.direita = remover(no.direita, temp.valor);
+            }
+        }
+        if (no == null) return null;
+        atualizarAltura(no);
+        return balancear(no);
+    }
+
+    public boolean buscar(String valor) {
+        return buscar(raiz, valor);
+    }
+
+    private boolean buscar(No no, String valor) {
+        if (no == null) return false;
+        if (valor.equals(no.valor)) return true;
+        if (valor.compareTo(no.valor) < 0) return buscar(no.esquerda, valor);
+        return buscar(no.direita, valor);
+    }
+
+    private No minValor(No no) {
+        while (no.esquerda != null) no = no.esquerda;
+        return no;
+    }
+
+    private void atualizarAltura(No no) {
+        int altE = (no.esquerda == null) ? -1 : no.esquerda.altura;
+        int altD = (no.direita == null) ? -1 : no.direita.altura;
+        no.altura = 1 + Math.max(altE, altD);
+        no.fator = altE - altD;
+    }
+
+    private No balancear(No no) {
+        if (no.fator > 1) {
+            if (no.esquerda.fator < 0) no.esquerda = rotacaoEsquerda(no.esquerda);
+            return rotacaoDireita(no);
+        }
+        if (no.fator < -1) {
+            if (no.direita.fator > 0) no.direita = rotacaoDireita(no.direita);
+            return rotacaoEsquerda(no);
+        }
+        return no;
+    }
+
+    private No rotacaoDireita(No y) {
+        No x = y.esquerda;
+        No T2 = x.direita;
+        x.direita = y;
+        y.esquerda = T2;
+        atualizarAltura(y);
+        atualizarAltura(x);
+        return x;
+    }
+
+    private No rotacaoEsquerda(No x) {
+        No y = x.direita;
+        No T2 = y.esquerda;
+        y.esquerda = x;
+        x.direita = T2;
+        atualizarAltura(x);
+        atualizarAltura(y);
+        return y;
+    }
+}
