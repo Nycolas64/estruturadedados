@@ -1,0 +1,9 @@
+public class NoRB {
+    String valor;
+    NoRB esquerda, direita, pai;
+    boolean vermelho = true;
+
+    public NoRB(String valor) {
+        this.valor = valor;
+    }
+}
