@@ -1,0 +1,121 @@
+public class ArvoreRubroNegra {
+    NoRB raiz;
+
+    public void inserir(String valor) {
+        NoRB z = new NoRB(valor);
+        NoRB y = null;
+        NoRB x = raiz;
+
+        while (x != null) {
+            y = x;
+            if (valor.compareTo(x.valor) < 0) {
+                x = x.esquerda;
+            } else {
+                x = x.direita;
+            }
+        }
+
+        z.pai = y;
+        if (y == null) {
+            raiz = z;
+        } else if (valor.compareTo(y.valor) < 0) {
+            y.esquerda = z;
+        } else {
+            y.direita = z;
+        }
+
+        z.esquerda = null;
+        z.direita = null;
+        z.vermelho = true;
+        corrigirInsercao(z);
+    }
+
+    private void corrigirInsercao(NoRB z) {
+        while (z.pai != null && z.pai.vermelho) {
+            if (z.pai == z.pai.pai.esquerda) {
+                NoRB y = z.pai.pai.direita;
+                if (y != null && y.vermelho) {
+                    z.pai.vermelho = false;
+                    y.vermelho = false;
+                    z.pai.pai.vermelho = true;
+                    z = z.pai.pai;
+                } else {
+                    if (z == z.pai.direita) {
+                        z = z.pai;
+                        rotacaoEsquerda(z);
+                    }
+                    z.pai.vermelho = false;
+                    z.pai.pai.vermelho = true;
+                    rotacaoDireita(z.pai.pai);
+                }
+            } else {
+                NoRB y = z.pai.pai.esquerda;
+                if (y != null && y.vermelho) {
+                    z.pai.vermelho = false;
+                    y.vermelho = false;
+                    z.pai.pai.vermelho = true;
+                    z = z.pai.pai;
+                } else {
+                    if (z == z.pai.esquerda) {
+                        z = z.pai;
+                        rotacaoDireita(z);
+                    }
+                    z.pai.vermelho = false;
+                    z.pai.pai.vermelho = true;
+                    rotacaoEsquerda(z.pai.pai);
+                }
+            }
+        }
+        raiz.vermelho = false;
+    }
+
+    private void rotacaoEsquerda(NoRB x) {
+        NoRB y = x.direita;
+        x.direita = y.esquerda;
+        if (y.esquerda != null) {
+            y.esquerda.pai = x;
+        }
+        y.pai = x.pai;
+        if (x.pai == null) {
+            raiz = y;
+        } else if (x == x.pai.esquerda) {
+            x.pai.esquerda = y;
+        } else {
+            x.pai.direita = y;
+        }
+        y.esquerda = x;
+        x.pai = y;
+    }
+
+    private void rotacaoDireita(NoRB x) {
+        NoRB y = x.esquerda;
+        x.esquerda = y.direita;
+        if (y.direita != null) {
+            y.direita.pai = x;
+        }
+        y.pai = x.pai;
+        if (x.pai == null) {
+            raiz = y;
+        } else if (x == x.pai.direita) {
+            x.pai.direita = y;
+        } else {
+            x.pai.esquerda = y;
+        }
+        y.direita = x;
+        x.pai = y;
+    }
+
+    public NoRB buscar(String valor) {
+        NoRB atual = raiz;
+        while (atual != null) {
+            if (valor.equals(atual.valor)) {
+                return atual;
+            } else if (valor.compareTo(atual.valor) < 0) {
+                atual = atual.esquerda;
+            } else {
+                atual = atual.direita;
+            }
+        }
+        return null;
+    }
+}
